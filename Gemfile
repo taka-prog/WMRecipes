@@ -53,6 +53,9 @@ gem 'kaminari', '~> 1.1.1'
 # 動的フォーム実装用gem
 gem 'nested_form_fields'
 
+# アップロードした画像の保存先
+gem 'cloudinary'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
