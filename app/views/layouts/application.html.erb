@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WMRecipes</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <header>
+    <!-- 非ログイン時 -->
+    <div class="container">
+      <div class ="row">
+        <nav class="navbar">
+          <ul class="nav navbar-nav navbar-header">
+            <li>
+              <%= link_to 'WMRecipes', root_path, class: "header-text" %>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li><%= link_to 'このサイトについて', about_path %></li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <%= attachment_image_tag current_user, :icon, :fill, 40, 40, fallback: "no_image.jpg", size: "40x40" %>
+                  <%= current_user.user_name %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'レシピ投稿', registration_recipe_path %></li>
+                  <li><%= link_to 'ユーザ設定', edit_user_path(current_user.id) %></li>
+                  <li><%= link_to 'ログアウト', destroy_user_session_path, :method => :delete %></li>
+                </ul>
+              </li>
+            <% else %>
+              <li><%= link_to 'このサイトについて', about_path %></li>
+              <li><%= link_to 'ログイン', new_user_session_path %></li>
+              <li><%= link_to 'ユーザー登録', new_user_registration_path %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <body>
+    <%= yield %>
+  </body>
+
+  <footer>
+    <span class="frame-text">
+      © 2019 Takamasa Hirasawa
+    </span>
+  </footer>
+</html>

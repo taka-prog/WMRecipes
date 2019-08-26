@@ -1,0 +1,79 @@
+<div class="container">
+	<div class="row recipe_info">
+		<div class="col-xs-5">
+			<%= attachment_image_tag @recipe, :cooking_image, :fill, 250, 250, fallback: "no_image.jpg", size: "250x250" %>
+			<br>
+			<section class="author_name">
+				投稿者名：<%= link_to @recipe.user.user_name, show_user_path(@recipe.user_id)  %></section>
+		</div>
+		<div class="col-xs-7">
+			<h2>レシピ名</h2>
+			<%= @recipe.recipe_name %>
+			<h2>投稿者コメント</h2>
+			<%= @recipe.author_comment %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="food">
+			<h2 class="form">食材</h2>
+			<table class="col-xs-12 table table-hover">
+				<thead>
+						<th class="col-xs-1"></th>
+						<th class="col-xs-1"></th>
+						<th class="col-xs-7">材料名</th>
+						<th class="col-xs-2">量</th>
+						<th class="col-xs-1"></th>
+				</thead>
+				<tbody>
+					<% @recipe.foods.each do |f| %>
+						<tr>
+							<td class="col-xs-1"></td>
+							<td class="col-xs-1"></td>
+							<td class="col-xs-7 text-left"><%= f.food_name %></td>
+							<td class="col-xs-2 text-left"><%= f.amount %></td>
+							<td class="col-xs-1"></td>
+						</tr>
+					<% end %>
+				</tbody>
+		</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="procedure">
+			<h2 class="form">手順</h2>
+			<table class="col-xs-12 table table-hover">
+				<thead>
+						<th class="col-xs-1 bottom-line"></th>
+						<th class="col-xs-1">番号</th>
+						<th class="col-xs-7">内容</th>
+						<th class="col-xs-2"></th>
+						<th class="col-xs-1"></th>
+				</thead>
+				<tbody>
+					<% @recipe.procedures.each do |p| %>
+						<tr>
+							<td></td>
+							<td><%= p.no %></td>
+							<td class="text-left procedure-text"><%= p.detail%></td>
+							<td>
+								<% if p.picture.present? %>
+										<%= attachment_image_tag p, :picture, :fill, 250, 250, fallback: "no_image.jpg", size: "200x200" %>
+								<% end %>
+							</td>
+							<td></td>
+						</div>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+        <% if user_signed_in? %>
+			<% if @recipe.user_id == current_user.id %>
+				<div class="col-xs-12 submit">
+					<%= link_to 'Edit', edit_recipe_path(@recipe.id), class: 'btn-margin btn btn-success btn-sm' %>
+					<%= link_to 'Delete', destroy_recipe_path(@recipe.id), method: :delete, class: 'btn-margin btn btn-danger btn-sm' %>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>

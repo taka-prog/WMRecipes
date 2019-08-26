@@ -1,0 +1,61 @@
+// Place all the styles related to the recipes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.buttons{
+	width: 100%;
+}
+
+.disp{
+	height: 400px;
+
+	background-image: url("WMRecipe.jpg");
+	background-position: center;
+	background-size: cover;
+	background-color: black;
+}
+
+div.mask{
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+}
+
+
+.buttons{
+	height: 400px;
+	padding-top: 150px;
+}
+
+.recipe_block{
+	margin: 15px 0;
+}
+
+.food, .procedure{
+	text-align: center;
+	padding-top: 20px;
+}
+
+.picture_button{
+	width: 100%;
+	text-align: center;
+}
+
+.btn-padding{
+	padding: 20px auto;
+}
+
+.procedure-text{
+	padding: 0 40px;
+}
+
+.submit{
+	text-align: center;
+}
+
+.recipes{
+	text-align: center;
+}
+
+.recipe_info{
+	padding-top: 20px;
+}

@@ -1,0 +1,68 @@
+<div class="container">
+	<%= form_for(@recipe, url: update_recipe_path) do |r| %>
+		<div class="clearfix">
+			<div class="col-xs-5">
+				<h2>料理画像</h2>
+	        	<%= r.attachment_field :cooking_image %>
+
+			</div>
+			<div class="col-xs-7">
+				<h2>レシピ名</h2>
+				<%= r.text_field :recipe_name, style:"width:100%" %>
+				<h2>投稿者コメント</h2>
+				<%= r.text_area :author_comment, style:"width:100%" %>
+			</div>
+		</div>
+		<div class="food">
+			<h2 class="form">食材</h2>
+			<table class="col-xs-12 table table-hover">
+				<thead>
+					<td class="col-xs-1"></td>
+					<th class="col-xs-1"></th>
+					<th class="col-xs-7">材料名</th>
+					<th class="col-xs-2">量</th>
+					<th class="col-xs-1"></th>
+				</thead>
+				<tbody>
+					<%= r.nested_fields_for :foods, wrapper_tag: :tr do |f| %>
+						<td></td>
+						<td></td>
+						<td><%= f.text_field :food_name, style:"width:100%" %></td>
+						<td><%= f.text_field :amount, style:"width:100%", class: 'text-left'  %></td>
+						<td><%= f.remove_nested_fields_link 'Delete', class: 'btn btn-danger', role: 'button' %></td>
+					<% end %>
+				</tbody>
+			</table>
+			<%= r.add_nested_fields_link :foods, '＋', class: 'btn add_btn', role: 'button' %>
+			<!-- テーブルタグ使って並べる -->
+		</div>
+
+		<div class="procedure">
+			<h2 class="form">手順</h2>
+			<table class="col-xs-12 table table-hover">
+				<thead>
+					<th class="col-xs-1"></th>
+					<th class="col-xs-1">番号</th>
+					<th class="col-xs-7">内容</th>
+					<th class="col-xs-2">添付画像</th>
+					<th class="col-xs-1"></th>
+				</thead>
+				<%= r.nested_fields_for :procedures, wrapper_tag: :tbody do |p| %>
+				<tr>
+					<td></td>
+					<td><%= p.text_field :no, style:"width:100%" %></td>
+					<td><%= p.text_area :detail, style:"width:100%" %></td>
+					<td><%= p.attachment_field :picture, class: 'picture_button' %></td>
+					<td><%= p.remove_nested_fields_link 'Delete', class: 'btn-margin btn btn-danger', role: 'button' %></td>
+				</tr>
+				<% end %>
+			</table>
+			<%= r.add_nested_fields_link :procedures, '＋', class: 'btn add_btn', role: 'button' %>
+		</div>
+
+		<div class="submit col-xs-12">
+			<%= r.submit '投稿', class: 'btn-margin btn btn-primary' %>
+		</div>
+
+	<% end %>
+</div>
