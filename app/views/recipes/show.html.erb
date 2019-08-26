@@ -26,7 +26,7 @@
 			<% if @recipes.present? %>
 			<% @recipes.each do |recipe| %>
 				<div class="recipe_block col-sm-4 col-xs-12">
-					<%= attachment_image_tag recipe, :cooking_image, :fill, 100, 100, fallback: "no_image.jpg", size: "250x250" %><br>
+					<%= attachment_image_tag recipe, :cooking_image, :fill, 250, 250, fallback: "noImage.png", size: "250x250" %><br>
 					<%= link_to recipe.recipe_name, show_recipe_path(recipe.id) %>
 				</div>
 			<% end %>

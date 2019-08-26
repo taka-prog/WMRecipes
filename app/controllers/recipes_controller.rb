@@ -54,8 +54,12 @@ class RecipesController < ApplicationController
 
 	def destroy
         recipe = Recipe.find(params[:id])
-        recipe.destroy
-        redirect_to root_path # flash: {notice: 'レシピを削除しました。'}
+        if recipe.user_id == current_user.id
+        	recipe.destroy
+        	redirect_to root_path # flash: {notice: 'レシピを削除しました。'}
+        else
+        	redirect_to show_recipe_path(recipe.id)
+        end
     end
 
 
