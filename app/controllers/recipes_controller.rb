@@ -31,6 +31,7 @@ class RecipesController < ApplicationController
 
 	def show_recipe
 		@recipe = Recipe.find(params[:id])
+		@procedures = @recipe.procedures.order('no')
 
 	end
 
