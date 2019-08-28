@@ -12,19 +12,18 @@ class RecipesController < ApplicationController
 
 	# レシピ投稿画面表示用コントローラ
 	def registration_recipe
-		@user = current_user
 		@recipe = Recipe.new
 		@recipe.foods.build
 		@recipe.procedures.build
 	end
 
 	def create
-		recipe = Recipe.new(recipe_params) # ストロングパラメータから精査されたデータだけをインスタンスに格納
-  		recipe.user_id = current_user.id
-  		if recipe.save
+		@recipe = Recipe.new(recipe_params) # ストロングパラメータから精査されたデータだけをインスタンスに格納
+  		@recipe.user_id = current_user.id
+  		if @recipe.save
   			redirect_to root_path
   		else
-  			redirect_to registration_recipe_path
+  			render action: :registration_recipe
   		end
 	end
 
@@ -41,12 +40,12 @@ class RecipesController < ApplicationController
   	end
 
   	def update
-  		recipe = Recipe.find(params[:id])
-  		if recipe.user_id == current_user.id
-	  		if recipe.update(recipe_params)
+  		@recipe = Recipe.find(params[:id])
+  		if @recipe.user_id == current_user.id
+	  		if @recipe.update(recipe_params)
 	  			redirect_to show_recipe_path(recipe.id)
 	  		else
-	  			redirect_to edit_recipe_path(recipe.id)
+	  			render action: :edit
 	  		end
 	  	else # レシピを投稿したユーザーとログイン中のユーザーが不一致の場合、更新せずトップページに戻る
 	  		redirect_to root_path
