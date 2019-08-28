@@ -20,8 +20,9 @@ class RecipesController < ApplicationController
 	def create
 		@recipe = Recipe.new(recipe_params) # ストロングパラメータから精査されたデータだけをインスタンスに格納
   		@recipe.user_id = current_user.id
+		@procedures = @recipe.procedures.order('no')	# リダイレクト先での表示用
   		if @recipe.save
-  			redirect_to root_path
+  			rrender action: :show_recipe
   		else
   			render action: :registration_recipe
   		end
@@ -41,9 +42,10 @@ class RecipesController < ApplicationController
 
   	def update
   		@recipe = Recipe.find(params[:id])
+		@procedures = @recipe.procedures.order('no')	# リダイレクト先での表示用
   		if @recipe.user_id == current_user.id
 	  		if @recipe.update(recipe_params)
-	  			redirect_to show_recipe_path(recipe.id)
+	  			render action: :show_recipe
 	  		else
 	  			render action: :edit
 	  		end
