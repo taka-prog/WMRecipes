@@ -1,3 +1,4 @@
+<p class="notice"><%= flash.notice %></p>
 <div class="container">
 	<div class="row">
 	<%= form_for(@recipe, url: '/recipes') do |r| %>
@@ -31,7 +32,7 @@
 						<td></td>
 						<td><%= f.text_field :food_name, style:"width:100%" %></td>
 						<td><%= f.text_field :amount, style:"width:100%", class: 'text-left'  %></td>
-						<td><%= f.remove_nested_fields_link 'Delete', class: 'btn btn-danger', role: 'button' %></td>
+						<td><%= f.remove_nested_fields_link '削除', class: 'btn btn-danger', role: 'button' %></td>
 					<% end %>
 				</tbody>
 			</table>
@@ -55,7 +56,7 @@
 					<td><%= p.text_field :no, style:"width:100%" %></td>
 					<td><%= p.text_area :detail, style:"width:100%" %></td>
 					<td><%= p.attachment_field :picture, class: 'picture_button' %></td>
-					<td><%= p.remove_nested_fields_link 'Delete', class: 'btn-margin btn btn-danger', role: 'button' %></td>
+					<td><%= p.remove_nested_fields_link '削除', class: 'btn-margin btn btn-danger', role: 'button' %></td>
 				</tr>
 				<% end %>
 			</table>
