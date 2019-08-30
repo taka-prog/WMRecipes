@@ -22,7 +22,7 @@ class RecipesController < ApplicationController
   		@recipe.user_id = current_user.id
 		@procedures = @recipe.procedures.order('no')	# リダイレクト先での表示用
   		if @recipe.save
-  			rrender action: :show_recipe
+  			render action: :show_recipe
   		else
   			render action: :registration_recipe
   		end
