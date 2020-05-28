@@ -48,7 +48,7 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 
 # kaminari
-gem 'kaminari', '~> 1.1.1'
+gem 'kaminari', '~> 1.2.1'
 
 # 動的フォーム実装用gem
 gem 'nested_form_fields'
